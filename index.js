@@ -9,33 +9,20 @@ var camelCase = require('camelcase');
 var upperCamelCase = require('uppercamelcase');
 
 var PLUGIN_NAME = 'gulp-angular-components';
+var IIFE_HEADER = "(function () {\n";
+var IIFE_FOOTER = "})();";
 
 function isWindows () {
   return process.platform.match(/^win/);
 }
 
-function getIIFEHeader () {
-  return "(function () {\n";
-}
-
-function getIIFEFooter () {
-  return "})();";
-}
-
-var angularComponentExtensions = {
-  config: '.config.js',
-  controller: '.controller.js',
-  directive: '.directive.js',
-  run: '.run.js',
-  constant: '.constant.js',
-  filter: '.filter.js',
-  factory: '.factory.js',
-  service: '.service.js'
-};
-
 var gulpAngularComponents = function gulpAngularComponents (options) {
   var moduleName = options.moduleName;
   var addIIFE = options.addIIFE;
+
+  if (addIIFE === undefined) {
+    addIIFE = true;
+  }
 
   return through.obj(function (file, encoding, callback) {
 
@@ -58,13 +45,14 @@ var gulpAngularComponents = function gulpAngularComponents (options) {
       filePath = fileName.replace(/\\/g, '/');
     }
 
+    // TODO: sourcemaps?
     // enable sourcemaps
     // if (file.sourceMap) {
     //   options.makeSourceMaps = true;
     // }
 
     var newContentString = file.contents.toString();
-    var footer = (addIIFE === true) ? getIIFEFooter() : '';
+    var footer = (addIIFE === true) ? IIFE_FOOTER : '';
     var matches = /([^\/.\s]+)\.([^\/.\s]+)(\.[^\/\s]+)$/g.exec(filePath);
 
     if (matches.length !== 4) {
@@ -76,23 +64,21 @@ var gulpAngularComponents = function gulpAngularComponents (options) {
     var type = matches[2]; // "route"
     var extension = matches[3]; // ".js"
 
-    var componentExtension = angularComponentExtensions[type];
+    var componentExtension = '.' + type + '.js';
     var moduleWrap = "angular.module('" + moduleName + "')";
     var functionName = camelCase(path.basename(fileName, componentExtension));
     var parameter = '';
 
-    switch (type) {
+    // route type is a config angular element
+    if (type === 'route') {
+      type = 'config';
+    }
 
-      // angular.module('demo').controller('DashboardController', DashboardController);
+    switch (type) {
       case 'controller':
         functionName = upperCamelCase(functionName) + 'Controller';
         parameter = "'" + functionName + "', ";
         break;
-
-      // angular.module('demo').factory('users', users);
-      // angular.module('demo').directive('docs', docs);
-      // angular.module('demo').constant('config', config);
-      // angular.module('demo').filter('date', date);
       case 'factory':
       case 'service':
       case 'directive':
@@ -100,9 +86,6 @@ var gulpAngularComponents = function gulpAngularComponents (options) {
       case 'filter':
         parameter = "'" + functionName + "', ";
         break;
-
-      // angular.module('demo').run(run)
-      // angular.module('demo').config(config);
       case 'run':
       case 'config':
         break;
@@ -120,12 +103,13 @@ var gulpAngularComponents = function gulpAngularComponents (options) {
     gutil.log(gutil.colors.white('Rendering component: ') + gutil.colors.green(fileName) + ' ' + gutil.colors.gray(header));
 
     if (addIIFE) {
-      header = getIIFEHeader() + header;
+      header = IIFE_HEADER + header;
     }
 
     newContentString = header + newContentString + footer;
     file.contents = new Buffer(newContentString);
 
+    // TODO: sourcemaps?
     // if (file.sourceMap) {
     //   applySourceMap(file, map);
     // }
