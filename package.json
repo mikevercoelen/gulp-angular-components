@@ -1,6 +1,6 @@
 {
   "name": "gulp-angular-components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Gulp plugin for creating angular apps with a component architecture",
   "main": "index.js",
   "repository": {
