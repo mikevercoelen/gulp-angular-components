@@ -36,7 +36,7 @@ var angularComponentExtensions = {
 
 var gulpAngularComponents = function gulpAngularComponents (options) {
   var moduleName = options.moduleName;
-  var addIIFE = options.addIIFE || true;
+  var addIIFE = options.addIIFE;
 
   return through.obj(function (file, encoding, callback) {
 
