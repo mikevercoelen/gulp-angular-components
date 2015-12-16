@@ -7,6 +7,12 @@
     "type": "git",
     "url": "git+https://tomgrooffer@github.com/tomgrooffer/gulp-angular-components.git"
   },
+  "keywords": [
+    "gulp",
+    "plugin",
+    "angular",
+    "components",
+  ],
   "author": "Mike Vercoelen <mike.vercoelen@gmail.com>",
   "license": "MIT",
   "bugs": {
