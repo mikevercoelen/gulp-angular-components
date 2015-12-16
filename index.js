@@ -23,7 +23,6 @@ function getIIFEFooter () {
 }
 
 var angularComponentExtensions = {
-  route: '.route.js',
   config: '.config.js',
   controller: '.controller.js',
   directive: '.directive.js',
@@ -102,10 +101,8 @@ var gulpAngularComponents = function gulpAngularComponents (options) {
         parameter = "'" + functionName + "', ";
         break;
 
-      // angular.module('demo').config(route);
       // angular.module('demo').run(run)
       // angular.module('demo').config(config);
-      case 'route':
       case 'run':
       case 'config':
         break;
