@@ -11,7 +11,7 @@
     "gulp",
     "plugin",
     "angular",
-    "components",
+    "components"
   ],
   "author": "Mike Vercoelen <mike.vercoelen@gmail.com>",
   "license": "MIT",
