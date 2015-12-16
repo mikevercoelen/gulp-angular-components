@@ -102,11 +102,16 @@ var gulpAngularComponents = function gulpAngularComponents (options) {
 
     gutil.log(gutil.colors.white('Rendering component: ') + gutil.colors.green(fileName) + ' ' + gutil.colors.gray(header));
 
-    if (addIIFE) {
-      header = IIFE_HEADER + header;
+    if (type === 'constant') {
+      newContentString = newContentString + header + footer;
+    } else {
+      newContentString = header + newContentString + footer;
     }
 
-    newContentString = header + newContentString + footer;
+    if (addIIFE) {
+      newContentString = IIFE_HEADER + newContentString;
+    }
+
     file.contents = new Buffer(newContentString);
 
     // TODO: sourcemaps?
