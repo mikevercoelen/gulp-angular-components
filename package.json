@@ -1,6 +1,6 @@
 {
   "name": "gulp-angular-components",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Gulp plugin for creating angular apps with a component architecture",
   "main": "index.js",
   "repository": {
@@ -26,6 +26,9 @@
     "path": "^0.12.7",
     "through2": "^2.0.0",
     "uppercamelcase": "^1.1.0",
-    "vinyl-sourcemaps-apply": "^0.2.0"
+    "vinyl-sourcemaps-apply": "^0.2.0",
+    "escodegen": "^1.7.1",
+    "esprima": "^2.7.1",
+    "estemplate": "^0.4.0"
   }
 }

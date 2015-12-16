@@ -12,6 +12,7 @@ Benefits:
 - Faster development, believe me ;)
 - Uses [John Papa](https://github.com/johnpapa/angular-styleguide) naming conventions
 - Never fucking write boilerplate code anymore like: ```javascript angular.module('demo').directive('dashboard', myDirectiveFunction);``` etc.
+- Compatible with [Gulp Sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps)
 
 # Install
 
@@ -27,14 +28,17 @@ gulpfile.js
 
 ```javascript
 var gulp = require('gulp');
+var sourcemaps = require('gulp-sourcemaps');
 var angularComponents = require('gulp-angular-components');
 
 gulp.task('components', function () {
   return gulp
     .src('src/components/*')
+    .pipe(sourcemaps.init())
     .pipe(angularComponents({
       moduleName: 'myApp'
     }))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('.tmp/scripts'));
 });
 ```
