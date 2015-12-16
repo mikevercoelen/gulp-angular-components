@@ -3,6 +3,9 @@
 *NOTE:* This is more than just a gulp plugin, it is part of a very cool architecture
 for developing Angular.js apps.
 
+# Workflow integration
+Check [angular-components](https://www.npmjs.com/package/angular-components) for the complete workflow integration :)
+
 Benefits:
 
 - Good, stable and most of all SIMPLE structure
@@ -24,30 +27,27 @@ gulpfile.js
 
 ```javascript
 var gulp = require('gulp');
-var sourcemaps = require('gulp-sourcemaps');
 var angularComponents = require('gulp-angular-components');
 
 gulp.task('components', function () {
   return gulp
     .src('src/components/*')
-    .pipe(sourcemaps.init())
-      .pipe(angularComponents({
-        moduleName: 'myApp'
-      }))
-    .pipe(sourcemaps.write())
+    .pipe(angularComponents({
+      moduleName: 'myApp'
+    }))
     .pipe(gulp.dest('.tmp/scripts'));
 });
 ```
 
-src/components/dashboard/dashboard.directive.js
-```javascript
-function dashboard () {
-  return {
-    restrict: 'E',
-    templateUrl: 'dashboard/dashboard.html',
-    
-  }
-}
-```
+## Options
 
-# Options
+#### moduleName
+Type: `String` (mandatory)
+
+The name of the angular.js module
+
+### addIEFF
+type: 'Bool' (optional)
+default: true
+
+Whether you want to add a global fn wrapper around your component files, leave it on, unless you have a wrapper task already.
