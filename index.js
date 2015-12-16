@@ -11,7 +11,7 @@ var upperCamelCase = require('uppercamelcase');
 var PLUGIN_NAME = 'gulp-angular-components';
 
 function isWindows () {
-  return process.platform.match(/^win/;
+  return process.platform.match(/^win/);
 }
 
 function getIIFEHeader () {
@@ -52,11 +52,11 @@ var gulpAngularComponents = function gulpAngularComponents (options) {
     }
 
     // windows: replace front slash
-    var fileName = file.path.replace(file.base, '');
+    var filePath = file.path.replace(file.base, '');
 
     // windows: normalize platform slashes
     if (isWindows()) {
-      fileName = fileName.replace(/\\/g, '/');
+      filePath = fileName.replace(/\\/g, '/');
     }
 
     // enable sourcemaps
@@ -120,7 +120,7 @@ var gulpAngularComponents = function gulpAngularComponents (options) {
       parameter + // '' OR 'DashboardController, '
       functionName + ');'; // 'DashboardController);'
 
-    gutil.log(gutil.colors.white('Rendering component: ') + gutil.colors.green(fileName) + ' ' + gutil.colors.gray(angularComponentHeader));
+    gutil.log(gutil.colors.white('Rendering component: ') + gutil.colors.green(fileName) + ' ' + gutil.colors.gray(header));
 
     if (addIIFE) {
       header = getIIFEHeader() + header;
