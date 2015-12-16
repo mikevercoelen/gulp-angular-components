@@ -1,0 +1,16 @@
+{
+  "name": "gulp-angular-components",
+  "version": "0.0.1",
+  "description": "Gulp plugin for creating angular apps with a component architecture",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://tomgrooffer@github.com/tomgrooffer/gulp-angular-components.git"
+  },
+  "author": "Mike Vercoelen <mike.vercoelen@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomgrooffer/gulp-angular-components/issues"
+  },
+  "homepage": "https://github.com/tomgrooffer/gulp-angular-components#readme"
+}
