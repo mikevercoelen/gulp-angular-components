@@ -3,8 +3,8 @@
 *NOTE:* This is more than just a gulp plugin, it is part of a very cool architecture
 for developing Angular.js apps.
 
-# Workflow integration
-Check [angular-components](https://www.npmjs.com/package/angular-components) for the complete workflow integration :)
+# Workflow
+Check [angular-components](https://www.npmjs.com/package/slush-angular-components) for the complete workflow integration :)
 
 Benefits:
 
